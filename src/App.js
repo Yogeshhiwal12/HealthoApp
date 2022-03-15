@@ -1,24 +1,45 @@
-import logo from './logo.svg';
+import Navbar from './components/Navbar';
 import './App.css';
+import React,{ useState} from 'react';
+import Content from './components/Content';
+import Work from './components/Work';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import Team from './components/Team';
+import Product from './components/Product';
+import FAQ from './components/FAQ';
 
 function App() {
+  const [mode] = useState('dark')
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <Router>
+    <div>
+      <Navbar mode={mode}/>
+      <Switch>
+        <Route exact path="/work">
+          <Work />
+        </Route>
+        <Route exact path="/team">
+          <Team />
+        </Route>
+        <Route exact path="/faq">
+          <FAQ />
+        </Route>
+        <Route exact path="/product">
+          <Product />
+        </Route>
+        <Route exact path="/">
+          <Content />
+        </Route>
+      </Switch>
     </div>
+    </Router>
+    </>
   );
 }
 
